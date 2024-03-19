@@ -316,16 +316,26 @@ titan_host_install(){
     setup_host_daemon_job
 }
 
+#检查函数
+check_install(){
+    # 检测是否为root用户
+    if [ "$(id -u)" != "0" ]; then
+       echo "该脚本需要以root权限运行" 1>&2
+       exit 1
+    fi
+    local running_containers
+    running_containers=$(docker ps -q | wc -l) # 获取当前运行的容器数量
+    if [ "$running_containers" -gt 2 ]; then
+        echo "当前运行的Docker容器数量为 $running_containers，大于3，开始执行安装程序..."
+        main_install
+    else
+        echo "当前运行的Docker容器数量为 $running_containers，不满足条件，不执行安装程序。"
+        main_install
+    fi    
+}
 
-###################################函数区域结束#################################
-
-# 检测是否为root用户
-if [ "$(id -u)" != "0" ]; then
-   echo "该脚本需要以root权限运行" 1>&2
-   exit 1
-fi
-
-
+#安装函数
+main_install(){
 # 处理命令行参数
 while [ "$#" -gt 0 ]; do
     case "$1" in
@@ -385,3 +395,7 @@ setup_cron_job
 echo "******************容器守护进程运行完成******************"
 sleep 5
 echo "******************所有任务安装完成******************"
+}
+
+###################################函数区域结束#################################
+check_install
