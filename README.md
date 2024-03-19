@@ -1,7 +1,9 @@
 # Titan 一键启动指南
 
-## - [特别邀请链接(点击前往)](https://test1.titannet.io/intiveRegister?code=wLFnFN)
-
+##  [Titan特别邀请链接(点击前往)](https://test1.titannet.io/intiveRegister?code=wLFnFN)
+##  [Titan特别邀请链接(点击前往)](https://test1.titannet.io/intiveRegister?code=wLFnFN)
+##  [Titan特别邀请链接(点击前往)](https://test1.titannet.io/intiveRegister?code=wLFnFN)
+## <a href="https://test1.titannet.io/intiveRegister?code=wLFnFN" target="_blank">Titan特别邀请链接(点击前往)</a>
 ### 启动帮助
 
 在使用脚本前，请确保了解以下参数的用途：
