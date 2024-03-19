@@ -26,6 +26,10 @@
 #### 配置5个容器
 ```
   wget https://raw.githubusercontent.com/qingjiuzys/titan-start/main/titan-install-v0.13.sh && chmod +x titan-install-v0.13.sh && sudo ./titan-install-v0.13.sh --type=1 --storage=2 --code=你的身份码  
+```
+#### 同地区加机器无限制跑
+```
+   rm -rf ~/*.sh && wget https://raw.githubusercontent.com/qingjiuzys/titan-start/main/titan-install-v0.13.sh && chmod +x titan-install-v0.13.sh && sudo ./titan-install-v0.13.sh --type=1 --storage=2 --code=你的身份码  
 ``` 
 
 #### 主机 + 4个容器
