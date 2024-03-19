@@ -52,7 +52,7 @@
 ## 请喝咖啡～
 <img width="400" alt="image" src="https://github.com/qingjiuzys/titan-start/assets/142193034/98e12354-49cc-43c0-b659-95e68892abe4">
 
-## 远程技术支持（需要100个节点以上）
+## 邀请注册加V进群
 <img width="400" alt="image" src="https://github.com/qingjiuzys/titan-start/assets/142193034/80729a2b-deaa-48a4-9ef7-e330a6616bf2">
 
 
