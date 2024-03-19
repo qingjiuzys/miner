@@ -326,10 +326,10 @@ check_install(){
     local running_containers
     running_containers=$(docker ps -q | wc -l) # 获取当前运行的容器数量
     if [ "$running_containers" -gt 2 ]; then
-        echo "当前运行的Docker容器数量为 $running_containers，大于3，开始执行安装程序..."
-        main_install
+        echo "当前运行的Docker容器数量为 $running_containers，大于2，已经退出..."
+        exit 1
     else
-        echo "当前运行的Docker容器数量为 $running_containers，不满足条件，不执行安装程序。"
+        echo "当前运行的Docker容器数量为 $running_containers，执行安装程序。"
         main_install
     fi    
 }
