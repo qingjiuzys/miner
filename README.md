@@ -50,8 +50,10 @@
 
 
 ## 请喝咖啡～
-![image](https://github.com/qingjiuzys/titan-start/assets/142193034/92765387-b9cc-4de3-8aef-43830389e729)
+<img width="400" alt="image" src="https://github.com/qingjiuzys/titan-start/assets/142193034/98e12354-49cc-43c0-b659-95e68892abe4">
 
 ## 远程技术支持（需要100个节点以上）
-![image](https://github.com/qingjiuzys/titan-start/assets/142193034/fe03dd89-e280-4e93-94df-15f48372249f)
+<img width="400" alt="image" src="https://github.com/qingjiuzys/titan-start/assets/142193034/80729a2b-deaa-48a4-9ef7-e330a6616bf2">
+
+
 
