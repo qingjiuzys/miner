@@ -76,7 +76,7 @@ install_cron() {
         echo "******************Cron服务未安装，开始安装******************"
         if [ -f /etc/lsb-release ]; then
             # 对于基于Debian的系统
-            apt-get update && apt-get install -y cron
+            apt-get update -y && apt-get install -y cron
         elif [ -f /etc/redhat-release ]; then
             # 对于基于RHEL的系统
             yum install -y cronie
@@ -209,7 +209,7 @@ install_docker(){
         case "$ID" in
             "debian"|"ubuntu")
                 echo "******************在Debian/Ubuntu上安装Docker******************"
-                sudo apt-get update
+                sudo apt-get update -y
                 sudo apt-get install -y docker
                 ;;
             "centos"|"rhel"|"fedora"|"opencloudos")
@@ -240,14 +240,14 @@ init_docker(){
         echo "******************更新系统并安装必要的依赖******************"
         if [ -f /etc/lsb-release ]; then
             # 对于基于Debian的系统
-            apt-get update && apt-get install -y \
+            apt-get update -y && apt-get install -y \
             apt-transport-https \
             ca-certificates \
             curl \
             software-properties-common
         elif [ -f /etc/redhat-release ]; then
             # 对于基于RHEL的系统
-            yum update && yum install -y \
+            yum update -y && yum install -y \
             yum-utils \
             device-mapper-persistent-data \
             lvm2
