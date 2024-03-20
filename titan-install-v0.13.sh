@@ -13,21 +13,6 @@ storage=2048 # 新增容器限制大小
 DAEMON_CRON_SCRIPT_PATH="/usr/local/bin/check_titan_daemon.sh"
 TITAN_EDGE_BIN_URL="https://zeenyun-temp.oss-cn-shanghai.aliyuncs.com/titan_v0.1.13.tar.gz"
 
-# 处理命令行参数
-while [ "$#" -gt 0 ]; do
-    case "$1" in
-        --type=*) type="${1#*=}" ;;
-        --code=*) code="${1#*=}" ;;
-        --already_install_NFS=*) already_install_NFS="${1#*=}" ;;
-        --nfsurl=*) nfsurl="${1#*=}"  ;; # 如果提供了nfsurl，则容器数量改为5
-        --containers=*) containers="${1#*=}" ;;
-        --storage=*) storage="${1#*=}" ;;
-        -h|--help) show_help; exit 0 ;;
-        *) echo "未知参数: $1" ; show_help; exit 1 ;;
-    esac
-    shift
-done
-
 show_help() {
     cat << EOF
 
@@ -60,6 +45,20 @@ OPTIONS:
 EOF
 }
 
+# 处理命令行参数
+while [ "$#" -gt 0 ]; do
+    case "$1" in
+        --type=*) type="${1#*=}" ;;
+        --code=*) code="${1#*=}" ;;
+        --already_install_NFS=*) already_install_NFS="${1#*=}" ;;
+        --nfsurl=*) nfsurl="${1#*=}"  ;; # 如果提供了nfsurl，则容器数量改为5
+        --containers=*) containers="${1#*=}" ;;
+        --storage=*) storage="${1#*=}" ;;
+        -h|--help) show_help; exit 0 ;;
+        *) echo "未知参数: $1" ; show_help; exit 1 ;;
+    esac
+    shift
+done
 
 ###################################函数区域#################################
 
