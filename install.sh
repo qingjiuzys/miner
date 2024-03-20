@@ -407,14 +407,14 @@ echo "******************所有titan任务安装完成******************"
 check_meson_gaga_install(){
     if [ -n "$meson_gaga_code" ]; then
         echo "******************正在安装meson->gaga******************"
-        curl -o apphub-linux-amd64.tar.gz $MESON_GAGA_BIN_URL && tar -zxf apphub-linux-amd64.tar.gz && rm -f apphub-linux-amd64.tar.gz && cd ./apphub-linux-amd64
-        sudo ./apphub service remove && sudo ./apphub service install
+        curl -o apphub-linux-amd64.tar.gz $MESON_GAGA_BIN_URL && tar -zxf apphub-linux-amd64.tar.gz && rm -f apphub-linux-amd64.tar.gz
+        sudo ./apphub-linux-amd64/apphub service remove && sudo ./apphub service install
         sleep 20
-        sudo ./apphub service start
+        sudo ./apphub-linux-amd64/apphub service start
         sleep 30 
         ./apphub status
         sleep 20
-        sudo ./apps/gaganode/gaganode config set --token=$meson_gaga_code
+        sudo ./apphub-linux-amd64/apps/gaganode/gaganode config set --token=$meson_gaga_code
         ./apphub restart
         echo "******************meson->gaga安装结束******************"
        else
@@ -422,11 +422,12 @@ check_meson_gaga_install(){
     fi
 
 }
-#检查安装meson_gaga
+#检查安装meson_cdn
 check_meson_cdn_install(){
     if [ -n "$meson_cdn_code" ]; then
         echo "******************正在安装meson->cdn******************"
-        wget  $MESON_CDN_BIN_URL&& tar -zxf meson_cdn-linux-amd64.tar.gz && rm -f meson_cdn-linux-amd64.tar.gz && cd ./meson_cdn-linux-amd64 && sudo ./service install meson_cdn        sleep 20
+        wget  $MESON_CDN_BIN_URL -O meson_cdn-linux-amd64.tar.gz -O meson_cdn-linux-amd64.tar.gz&& tar -zxf meson_cdn-linux-amd64.tar.gz && rm -f meson_cdn-linux-amd64.tar.gz && cd ./meson_cdn-linux-amd64 && sudo ./service install meson_cdn
+        sleep 20
         sudo ./meson_cdn config set --token=$meson_cdn_code --https_port=443 --cache.size=30        ./apphub status
         sleep 20
         sudo ./service start meson_cdn
@@ -445,4 +446,4 @@ echo "******************所有安装任务完成********************"
 
 echo "******************检查安装meson->cdn中******************"
 check_meson_cdn_install
-echo "******************所有安装任务完成********************"
+echo "******************所有安装任务完成**********************"
