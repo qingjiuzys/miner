@@ -1,6 +1,7 @@
 # Titan + Meson 一键启动指南
 
 ##  [Titan特别邀请链接(点击注册)](https://test1.titannet.io/intiveRegister?code=wLFnFN)
+
 ##  [meson特别邀请链接(点击注册)](https://dashboard.gaganode.com/register?referral_code=qpkofealpfaomjb)
 
 ### 特性
@@ -37,9 +38,11 @@
 
 
 ### 示例命令
-#### 配置5个容器
+#### 配置titan 5个容器 + meson
 ```
   wget https://raw.githubusercontent.com/qingjiuzys/titan-start/main/install.sh && chmod +x install.sh && sudo ./install.sh --type=1 --storage=2 --code=你的titan身份码 --meson_gaga_code=你的mesonGaga码 --meson_cdn_code=你的mesonCDN码
+```
+
 
 #### 配置5个容器
 ```
