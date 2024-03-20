@@ -2,6 +2,19 @@
 
 ##  [Titan特别邀请链接(点击注册)](https://test1.titannet.io/intiveRegister?code=wLFnFN)
 
+
+### 特性
+
+- 支持NFS启动五个节点
+- 支持百万台直接启动
+- 支持实时挂在NFS
+- 支持自定义容器数量
+- 支持自定义存储空间管理
+- 支持三个系统 Ubuntu 18.04， Debian， OpenCloudOS 8
+- 修复了官方容器无法绑定身份码的问题
+- 支持容器 + 主机的部署模式
+- 支持自动恢复（磁盘足够的情况下定时任务会生效并自动重启）
+  
 ### 启动帮助
 
 在使用脚本前，请确保了解以下参数的用途：
@@ -19,7 +32,9 @@
 
 ### 帮助命令
 
-使用`--help`参数来获取脚本的帮助信息。
+使用`--help`参数来获取脚本的帮助信息。如：
+<img width="718" alt="image" src="https://github.com/qingjiuzys/titan-start/assets/142193034/304750c6-8d35-4105-aa6e-343a47666469">
+
 
 ### 示例命令
 
