@@ -219,81 +219,6 @@ setup_and_bind() {
         echo "******************安装绑定完成，请稍后登录控制台查看节点******************"
 }
 
-install_docker(){
-     if [ -f /etc/os-release ]; then
-        . /etc/os-release
-        case "$ID" in
-            "debian"|"ubuntu")
-                echo "******************在Debian/Ubuntu上安装Docker******************"
-                sudo apt-get update -y
-                sudo apt-get install -y docker
-                ;;
-            "centos"|"rhel"|"fedora"|"opencloudos")
-                echo "******************在CentOS/RHEL/Fedora/OpenCloudOS上安装Docker******************"
-                sudo yum install -y docker
-                ;;
-            *)
-                echo "******************不支持的Linux发行版: $ID******************"
-                exit  1
-                ;;
-        esac
-    else
-        echo "无法确定操作系统类型"
-        exit  1
-    fi
-    # 检查Docker是否安装成功
-    if command -v docker &> /dev/null; then
-        echo "******************Docker安装成功******************"
-    else
-        echo "******************Docker安装失败******************"
-        exit  1
-    fi
-}
-
-init_docker() {
-    # 检查系统类型
-    local os_type=$(uname -a)
-    
-    # 更新系统并安装必要的依赖
-    echo "******************更新系统并安装必要的依赖******************"
-    if [[ $os_type == *"opencloudos"* ]]; then
-        echo "******************在OpenCloudOS上安装Docker******************"
-        yum install -y docker
-    elif [ -f /etc/lsb-release ]; then
-        # 对于基于Debian的系统
-        apt-get update -y && apt-get install -y \
-        apt-transport-https \
-        ca-certificates \
-        curl \
-        software-properties-common
-    elif [ -f /etc/redhat-release ]; then
-        # 对于基于RHEL的系统
-        yum update -y && yum install -y \
-        yum-utils \
-        device-mapper-persistent-data \
-        lvm2
-    else
-        echo "*****************不支持的Linux发行版，尝试通用安装方法*****************"
-        # 使用Docker官方安装脚本
-        curl -fsSL https://get.docker.com -o get-docker.sh
-        sh get-docker.sh
-        if [ $? -ne 0 ]; then
-            echo "******************Docker安装失败，请检查您的网络连接或联系系统管理员******************" 1>&2
-            exit 1
-        fi
-    fi
-    
-    # 启动并使Docker开机自启
-    systemctl start docker
-    systemctl enable docker    
-    # 拉取指定的Docker镜像
-    docker pull docker.io/nezha123/titan-edge:1.0
-    echo "******************Docker安装脚本执行完毕******************"
-}
-
-
-
-
 # 检查是否使用NFS 
 check_use_nfs(){
     # 根据nfsurl参数设置基础目录
@@ -355,30 +280,29 @@ check_install(){
 
 #安装函数
 main_install(){
-init_docker
-check_use_nfs
-case $type in
-    1)
-        echo "******************您选择了安装5个容器***********************"
-        containers=5 
-        sleep 2
-        ;;
-    2)
-        echo "******************您选择了主机安装+4个容器*******************"
-        sleep 2
-        echo ""
-        echo "******************正在准备安装主机任务************************"
-        titan_host_install
-        echo "******************主机安装完成*****************************"
-        ;;
+    install_and_init_docker
+    check_use_nfs
+    case $type in
+        1)
+            echo "******************您选择了安装5个容器***********************"
+            containers=5 
+            sleep 2
+            ;;
+       2)
+            echo "******************您选择了主机安装+4个容器*******************"
+            sleep 2
+            echo ""
+            echo "******************正在准备安装主机任务************************"
+            titan_host_install
+            echo "******************主机安装完成*****************************"
+            ;;
 
-    *)
-        echo "******************您默认安装5个容器***********************"
-        containers=5 
-        sleep 2
-        ;;
-esac
-
+        *)
+            echo "******************您默认安装5个容器***********************"
+            containers=5 
+            sleep 2
+            ;;
+    esac
 echo "******************创建主机docker映射目录中******************"
 create_storage_directories
 echo "******************创建主机docker映射目录完成******************"
