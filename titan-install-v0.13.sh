@@ -278,6 +278,67 @@ check_install(){
     fi    
 }
 
+install_and_init_docker() {
+    # 加载系统信息
+    if [ -f /etc/os-release ]; then
+        . /etc/os-release
+    fi
+
+    local os_type=$(uname -a)
+
+    # 更新系统并安装必要的依赖
+    echo "******************更新系统并安装必要的依赖******************"
+    case $ID in
+        "debian"|"ubuntu")
+            echo "******************在Debian/Ubuntu上安装Docker******************"
+            apt-get update -y && apt-get install -y \
+            apt-transport-https \
+            ca-certificates \
+            curl \
+            software-properties-common
+            curl -fsSL https://get.docker.com -o get-docker.sh
+            sh get-docker.sh
+            ;;
+        "centos"|"rhel"|"fedora")
+            echo "******************在CentOS/RHEL/Fedora上安装Docker******************"
+            yum update -y && yum install -y \
+            yum-utils \
+            device-mapper-persistent-data \
+            lvm2
+            yum install -y docker
+            ;;
+        *)
+            if [[ $os_type == *"opencloudos"* ]]; then
+                echo "******************在OpenCloudOS上安装Docker******************"
+                yum install -y docker
+            else
+                echo "******************不支持的Linux发行版，尝试通用安装方法******************"
+                curl -fsSL https://get.docker.com -o get-docker.sh
+                sh get-docker.sh
+                if [ $? -ne 0 ]; then
+                    echo "******************Docker安装失败，请检查您的网络连接或联系系统管理员******************" 1>&2
+                    exit 1
+                fi
+            fi
+            ;;
+    esac
+
+    # 启动并使Docker开机自启
+    systemctl start docker
+    systemctl enable docker
+
+    # 检查Docker是否安装成功
+    if command -v docker &> /dev/null; then
+        echo "******************Docker安装成功******************"
+        # 拉取指定的Docker镜像
+        docker pull docker.io/nezha123/titan-edge:1.0
+        echo "******************Docker镜像拉取完毕******************"
+    else
+        echo "******************Docker安装失败******************"
+        exit 1
+    fi
+}
+
 #安装函数
 main_install(){
     install_and_init_docker
