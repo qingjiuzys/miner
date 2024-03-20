@@ -192,10 +192,12 @@ run_containers() {
 setup_and_bind() {
     for i in $(seq 1 $containers)
     do
-       echo "******************正在给docker实例更新CA证书******************"
-        docker exec -i titan-edge0$i bash -c "apt-get update && apt-get install -y ca-certificates"
-        echo "******************docker实例$titan-edge0$i更新CA证书完成******************"
-        sleep 1
+       # 新版本镜像已经不需要更新证书
+       # echo "******************正在给docker实例更新CA证书******************"
+       # docker exec -i titan-edge0$i bash -c "apt-get update && apt-get install -y ca-certificates"
+       # echo "******************docker实例$titan-edge0$i更新CA证书完成******************"
+       # 延迟20s绑定 
+        sleep 20
         echo "******************正在绑定个人身份码******************"
         docker exec -i titan-edge0$i bash -c "titan-edge bind --hash=$code https://api-test1.container1.titannet.io/api/v2/device/binding"
         echo "******************个人身份码绑定完成******************"
