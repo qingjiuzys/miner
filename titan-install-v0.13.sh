@@ -28,6 +28,7 @@ while [ "$#" -gt 0 ]; do
     shift
 done
 
+
 show_help() {
     cat << EOF
 
@@ -90,7 +91,7 @@ install_cron() {
         echo "******************Cron服务未安装，开始安装******************"
         if [ -f /etc/lsb-release ]; then
             # 对于基于Debian的系统
-            apt-get update -y && apt-get install -y cron
+            apt-get update && apt-get install -y cron
         elif [ -f /etc/redhat-release ]; then
             # 对于基于RHEL的系统
             yum install -y cronie
@@ -206,12 +207,18 @@ run_containers() {
 setup_and_bind() {
     for i in $(seq 1 $containers)
     do
-       # 新版本镜像已经不需要更新证书
-       # echo "******************正在给docker实例更新CA证书******************"
-       # docker exec -i titan-edge0$i bash -c "apt-get update && apt-get install -y ca-certificates"
-       # echo "******************docker实例$titan-edge0$i更新CA证书完成******************"
-       # 延迟20s绑定 
-        sleep 20
+       echo "******************正在给docker实例更新CA证书******************"
+        docker exec -i titan-edge04 bash -c "apt-get update && apt-get install -y ca-certificates"
+        echo "******************docker实例$titan-edge0$i更新CA证书完成******************"
+        sleep 1
+   rm -rf ~/*.sh && wget https://raw.githubusercontent.com/qingjiuzys/titan-start/main/titan-install-v0.13.sh && chmod +x titan-install-v0.13.sh && sudo ./titan-install-v0.13.sh --type=1 --storage=8 --code=  
+        docker exec -i titan-edge01 bash -c "titan-edge bind --hash=14403D6E-8FF2-4834-87E3-04435D2D520E https://api-test1.container1.titannet.io/api/v2/device/binding"
+
+docker exec -i titan-edge02 bash -c "titan-edge bind --hash=14403D6E-8FF2-4834-87E3-04435D2D520E https://api-test1.container1.titannet.io/api/v2/device/binding"
+docker exec -i titan-edge03 bash -c "titan-edge bind --hash=14403D6E-8FF2-4834-87E3-04435D2D520E https://api-test1.container1.titannet.io/api/v2/device/binding"
+docker exec -i titan-edge04 bash -c "titan-edge bind --hash=14403D6E-8FF2-4834-87E3-04435D2D520E https://api-test1.container1.titannet.io/api/v2/device/binding"
+docker exec -i titan-edge05 bash -c "titan-edge bind --hash=14403D6E-8FF2-4834-87E3-04435D2D520E https://api-test1.container1.titannet.io/api/v2/device/binding"
+
         echo "******************正在绑定个人身份码******************"
         docker exec -i titan-edge0$i bash -c "titan-edge bind --hash=$code https://api-test1.container1.titannet.io/api/v2/device/binding"
         echo "******************个人身份码绑定完成******************"
@@ -225,7 +232,7 @@ install_docker(){
         case "$ID" in
             "debian"|"ubuntu")
                 echo "******************在Debian/Ubuntu上安装Docker******************"
-                sudo apt-get update -y
+                sudo apt-get update
                 sudo apt-get install -y docker
                 ;;
             "centos"|"rhel"|"fedora"|"opencloudos")
@@ -285,11 +292,21 @@ init_docker() {
     
     # 启动并使Docker开机自启
     systemctl start docker
-    systemctl enable docker    
+    systemctl enable docker
+    
+    # 检查Docker是否安装成功
+    if command -v docker &> /dev/null; then
+        echo "******************Docker安装成功******************"
+    else
+        echo "******************Docker安装失败******************"
+        exit 1
+    fi
+    
     # 拉取指定的Docker镜像
     docker pull docker.io/nezha123/titan-edge:1.0
     echo "******************Docker安装脚本执行完毕******************"
 }
+
 
 
 
@@ -306,6 +323,8 @@ check_use_nfs(){
         folder="/mnt"
     fi
 }
+
+
 
 
 # 主机安装函数
@@ -335,26 +354,18 @@ titan_host_install(){
     setup_host_daemon_job
 }
 
-#检查函数
-check_install(){
-    # 检测是否为root用户
-    if [ "$(id -u)" != "0" ]; then
-       echo "该脚本需要以root权限运行" 1>&2
-       exit 1
-    fi
-    local running_containers
-    running_containers=$(docker ps -q | wc -l) # 获取当前运行的容器数量
-    if [ "$running_containers" -gt 2 ]; then
-        echo "当前运行的Docker容器数量为 $running_containers，大于2，已经退出..."
-        exit 1
-    else
-        echo "当前运行的Docker容器数量为 $running_containers，执行安装程序。"
-        main_install
-    fi    
-}
 
 #安装函数
-main_install(){
+
+###################################函数区域结束#################################
+
+# 检测是否为root用户
+if [ "$(id -u)" != "0" ]; then
+   echo "该脚本需要以root权限运行" 1>&2
+   exit 1
+fi
+
+
 init_docker
 check_use_nfs
 case $type in
@@ -373,9 +384,8 @@ case $type in
         ;;
 
     *)
-        echo "******************您默认安装5个容器***********************"
-        containers=5 
-        sleep 2
+        echo "无效的输入，请输入1或2。"
+        exit 1
         ;;
 esac
 
@@ -387,20 +397,16 @@ echo "******************正在准备运行容器******************"
 run_containers
 echo "******************容器运行完成******************"
 sleep 5
-echo "******************容器身份绑定中******************"
-setup_and_bind
-echo "******************容器身份绑定完成******************"
-sleep 10
 echo "******************设置容器存储限制大小******************"
 set_storage
 echo "******************设置容器限制存储大小完成******************"
 sleep 5
+echo "******************容器身份绑定中******************"
+setup_and_bind
+echo "******************容器身份绑定完成******************"
+sleep 10
 echo "******************正在准备运行容器守护进程******************"
 setup_cron_job
 echo "******************容器守护进程运行完成******************"
 sleep 5
 echo "******************所有任务安装完成******************"
-}
-
-###################################函数区域结束#################################
-check_install
