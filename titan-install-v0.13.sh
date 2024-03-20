@@ -234,39 +234,42 @@ install_docker(){
     fi
 }
 
-# 初始化docker
-init_docker(){
-        # 安装依赖
-        echo "******************更新系统并安装必要的依赖******************"
-        if [ -f /etc/lsb-release ]; then
-            # 对于基于Debian的系统
-            apt-get update -y && apt-get install -y \
-            apt-transport-https \
-            ca-certificates \
-            curl \
-            software-properties-common
-        elif [ -f /etc/redhat-release ]; then
-            # 对于基于RHEL的系统
-            yum update -y && yum install -y \
-            yum-utils \
-            device-mapper-persistent-data \
-            lvm2
-        else
-            echo "*****************不一定支持但在强制安装Docker*****************" 
-        fi
-        # 安装Docker
-        echo "******************正在安装Docker...******************"
+init_docker() {
+    # 检查系统类型
+    local os_type=$(uname -a)
+    
+    # 更新系统并安装必要的依赖
+    echo "******************更新系统并安装必要的依赖******************"
+    if [[ $os_type == *"opencloudos"* ]]; then
+        echo "******************在OpenCloudOS上安装Docker******************"
+        yum install -y docker
+    elif [ -f /etc/lsb-release ]; then
+        # 对于基于Debian的系统
+        apt-get update -y && apt-get install -y \
+        apt-transport-https \
+        ca-certificates \
+        curl \
+        software-properties-common
+    elif [ -f /etc/redhat-release ]; then
+        # 对于基于RHEL的系统
+        yum update -y && yum install -y \
+        yum-utils \
+        device-mapper-persistent-data \
+        lvm2
+    else
+        echo "*****************不支持的Linux发行版，尝试通用安装方法*****************"
+        # 使用Docker官方安装脚本
         curl -fsSL https://get.docker.com -o get-docker.sh
         sh get-docker.sh
-        if [ $? -eq 0 ]; then
-            echo "******************Docker安装成功******************"
-        else
-            echo "******************Docker安装失败（尝试其他方式安装docker）******************" 1>&2
-            install_docker
+        if [ $? -ne 0 ]; then
+            echo "******************Docker安装失败，请检查您的网络连接或联系系统管理员******************" 1>&2
+            exit 1
         fi
+    fi
+    
     # 启动并使Docker开机自启
     systemctl start docker
-    systemctl enable docker
+    systemctl enable docker    
     # 拉取指定的Docker镜像
     docker pull docker.io/nezha123/titan-edge:1.0
     echo "******************Docker安装脚本执行完毕******************"
