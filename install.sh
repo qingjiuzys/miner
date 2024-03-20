@@ -8,14 +8,16 @@ folder=""
 already_install_NFS=2
 containers=4 # 默认容器数量为4
 storage=2048 # 新增容器限制大小
-weason_gaga_code=""
+meson_gaga_code=""
+meson_cdn_code=""
 
 # titan环境变量定义
 DAEMON_CRON_SCRIPT_PATH="/usr/local/bin/check_titan_daemon.sh"
 TITAN_EDGE_BIN_URL="https://zeenyun-temp.oss-cn-shanghai.aliyuncs.com/titan_v0.1.13.tar.gz"
-# weason_gaga环境变量定义
-WEASON_GAGA_BIN_URL="https://assets.coreservice.io/public/package/60/app-market-gaga-pro/1.0.4/app-market-gaga-pro-1_0_4.tar.gz"
 
+# weason_gaga环境变量定义
+MESON_GAGA_BIN_URL="https://assets.coreservice.io/public/package/60/app-market-gaga-pro/1.0.4/app-market-gaga-pro-1_0_4.tar.gz"
+MESON_CDN_BIN_URL="https://staticassets.meson.network/public/meson_cdn/v3.1.20/meson_cdn-linux-amd64.tar.gz"
 show_help() {
     cat << EOF
 
@@ -30,7 +32,8 @@ OPTIONS:
     --already_install_NFS    是否已经安装NFS，1:是，2：否。
     --containers CONTAINERS  需要管理的容器数量，默认为 4。
     --storage STORAGE        需要管理的存储空间大小。
-    --weason_gaga_code       需要安装的weasonGagaCode(不填写不安装)                 
+    --meson_gaga_code        需要安装的mesonGagaCode(不填写不安装)       
+    --meson_cdn_code         需要安装的weasonCdnCode(不填写不安装)                           
     -h / --help              显示此帮助信息并退出。
 
 注意:
@@ -41,7 +44,7 @@ OPTIONS:
     - 微信：checkHeart666
     - 代码库（欢迎点赞）： https://github.com/qingjiuzys/titan-start
     - titan注册链接：https://test1.titannet.io/intiveRegister?code=wLFnFN
-    - weason注册链接：https://dashboard.gaganode.com/register?referral_code=qpkofealpfaomjb
+    - meson注册链接：https://dashboard.gaganode.com/register?referral_code=qpkofealpfaomjb
     - titan官网：https://titannet.io/
     - titan存储服务：https://storage.titannet.io/
     - titan测试节点控制台：https://test1.titannet.io/
@@ -60,7 +63,8 @@ while [ "$#" -gt 0 ]; do
         --nfsurl=*) nfsurl="${1#*=}"  ;; # 如果提供了nfsurl，则容器数量改为5
         --containers=*) containers="${1#*=}" ;;
         --storage=*) storage="${1#*=}" ;;
-        --weason_gaga_code=*) weason_gaga_code="${1#*=}" ;;
+        --meson_gaga_code=*) meson_gaga_code="${1#*=}" ;;
+        --meson_cdn_code=*) meson_cdn_code="${1#*=}" ;;
         -h|--help) show_help; exit 0 ;;
         *) echo "未知参数: $1" ; show_help; exit 1 ;;
     esac
@@ -399,27 +403,46 @@ echo "******************所有titan任务安装完成******************"
 }
 
 
-check_weason_gaga_install(){
-    if [ -n "$weason_gaga_code" ]; then
-        echo "******************正在安装weason->gaga******************"
-        curl -o apphub-linux-amd64.tar.gz $weason_gaga_app_url && tar -zxf apphub-linux-amd64.tar.gz && rm -f apphub-linux-amd64.tar.gz && cd ./apphub-linux-amd64
+#检查安装meson_gaga
+check_meson_gaga_install(){
+    if [ -n "$meson_gaga_code" ]; then
+        echo "******************正在安装meson->gaga******************"
+        curl -o apphub-linux-amd64.tar.gz $MESON_GAGA_BIN_URL && tar -zxf apphub-linux-amd64.tar.gz && rm -f apphub-linux-amd64.tar.gz && cd ./apphub-linux-amd64
         sudo ./apphub service remove && sudo ./apphub service install
         sleep 20
         sudo ./apphub service start
         sleep 30 
         ./apphub status
         sleep 20
-        sudo ./apps/gaganode/gaganode config set --token=$WEASON_GAGA_BIN_URL
+        sudo ./apps/gaganode/gaganode config set --token=$meson_gaga_code
         ./apphub restart
-        echo "******************weason->gaga安装结束******************"
+        echo "******************meson->gaga安装结束******************"
        else
-        echo "******************未选择安装weason_gaga_code******************"
+        echo "******************未选择安装meson_gaga_code******************"
+    fi
+
+}
+#检查安装meson_gaga
+check_meson_cdn_install(){
+    if [ -n "$meson_cdn_code" ]; then
+        echo "******************正在安装meson->cdn******************"
+        wget  $MESON_CDN_BIN_URL&& tar -zxf meson_cdn-linux-amd64.tar.gz && rm -f meson_cdn-linux-amd64.tar.gz && cd ./meson_cdn-linux-amd64 && sudo ./service install meson_cdn        sleep 20
+        sudo ./meson_cdn config set --token=$meson_cdn_code --https_port=443 --cache.size=30        ./apphub status
+        sleep 20
+        sudo ./service start meson_cdn
+        echo "******************meson->CDN安装结束******************"
+       else
+        echo "******************未选择安装meson_cdn******************"
     fi
 
 }
 
 ###################################函数区域结束#################################
 check_install
-echo "******************检查安装weason中******************"
-check_weason_gaga_install
+echo "******************检查安装meson->gaga中******************"
+check_meson_gaga_install
+echo "******************所有安装任务完成********************"
+
+echo "******************检查安装meson->cdn中******************"
+check_meson_cdn_install
 echo "******************所有安装任务完成********************"
