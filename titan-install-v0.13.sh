@@ -277,71 +277,78 @@ check_install(){
         main_install
     fi    
 }
-
-install_and_init_docker() {
-    # 加载系统信息
-    if [ -f /etc/os-release ]; then
+install_docker(){
+     if [ -f /etc/os-release ]; then
         . /etc/os-release
+        case "$ID" in
+            "debian"|"ubuntu")
+                echo "******************在Debian/Ubuntu上安装Docker******************"
+                sudo apt-get update
+                sudo apt-get install -y docker
+                ;;
+            "centos"|"rhel"|"fedora"|"opencloudos")
+                echo "******************在CentOS/RHEL/Fedora/OpenCloudOS上安装Docker******************"
+                sudo yum install -y docker
+                ;;
+            *)
+                echo "******************不支持的Linux发行版: $ID******************"
+                exit  1
+                ;;
+        esac
+    else
+        echo "无法确定操作系统类型"
+        exit  1
     fi
+    # 检查Docker是否安装成功
+    if command -v docker &> /dev/null; then
+        echo "******************Docker安装成功******************"
+    else
+        echo "******************Docker安装失败******************"
+        exit  1
+    fi
+}
 
-    local os_type=$(uname -a)
-
-    # 更新系统并安装必要的依赖
-    echo "******************更新系统并安装必要的依赖******************"
-    case $ID in
-        "debian"|"ubuntu")
-            echo "******************在Debian/Ubuntu上安装Docker******************"
-            apt-get update -y && apt-get install -y \
+# 初始化docker
+init_docker(){
+        # 安装依赖
+        echo "******************更新系统并安装必要的依赖******************"
+        if [ -f /etc/lsb-release ]; then
+            # 对于基于Debian的系统
+            apt-get update && apt-get install -y \
             apt-transport-https \
             ca-certificates \
             curl \
             software-properties-common
-            curl -fsSL https://get.docker.com -o get-docker.sh
-            sh get-docker.sh
-            ;;
-        "centos"|"rhel"|"fedora")
-            echo "******************在CentOS/RHEL/Fedora上安装Docker******************"
+        elif [ -f /etc/redhat-release ]; then
+            # 对于基于RHEL的系统
             yum update -y && yum install -y \
             yum-utils \
             device-mapper-persistent-data \
             lvm2
-            yum install -y docker
-            ;;
-        *)
-            if [[ $os_type == *"opencloudos"* ]]; then
-                echo "******************在OpenCloudOS上安装Docker******************"
-                yum install -y docker
-            else
-                echo "******************不支持的Linux发行版，尝试通用安装方法******************"
-                curl -fsSL https://get.docker.com -o get-docker.sh
-                sh get-docker.sh
-                if [ $? -ne 0 ]; then
-                    echo "******************Docker安装失败，请检查您的网络连接或联系系统管理员******************" 1>&2
-                    exit 1
-                fi
-            fi
-            ;;
-    esac
-
+        else
+            echo "*****************不一定支持但在强制安装Docker*****************" 
+        fi
+        # 安装Docker
+        echo "******************正在安装Docker...******************"
+        curl -fsSL https://get.docker.com -o get-docker.sh
+        sh get-docker.sh
+        if [ $? -eq 0 ]; then
+            echo "******************Docker安装成功******************"
+        else
+            echo "******************Docker安装失败（尝试其他方式安装docker）******************" 1>&2
+            install_docker
+        fi
     # 启动并使Docker开机自启
     systemctl start docker
     systemctl enable docker
-
-    # 检查Docker是否安装成功
-    if command -v docker &> /dev/null; then
-        echo "******************Docker安装成功******************"
-        # 拉取指定的Docker镜像
-        docker pull docker.io/nezha123/titan-edge:1.0
-        echo "******************Docker镜像拉取完毕******************"
-    else
-        echo "******************Docker安装失败******************"
-        exit 1
-    fi
+    # 拉取指定的Docker镜像
+    docker pull docker.io/nezha123/titan-edge:1.0
+    echo "******************Docker安装脚本执行完毕******************"
 }
 
 #安装函数
 main_install(){
-    install_and_init_docker
+    init_docker
     check_use_nfs
     case $type in
         1)
