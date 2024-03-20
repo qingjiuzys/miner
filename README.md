@@ -1,7 +1,7 @@
-# Titan 一键启动指南
+# Titan + Meson 一键启动指南
 
 ##  [Titan特别邀请链接(点击注册)](https://test1.titannet.io/intiveRegister?code=wLFnFN)
-
+##  [meson特别邀请链接(点击注册)](https://dashboard.gaganode.com/register?referral_code=qpkofealpfaomjb)
 
 ### 特性
 
@@ -37,11 +37,15 @@
 
 
 ### 示例命令
+#### 配置5个容器
+```
+  wget https://raw.githubusercontent.com/qingjiuzys/titan-start/main/install.sh && chmod +x install.sh && sudo ./install.sh --type=1 --storage=2 --code=你的titan身份码 --meson_gaga_code=你的mesonGaga码 --meson_cdn_code=你的mesonCDN码
 
 #### 配置5个容器
 ```
-  wget https://raw.githubusercontent.com/qingjiuzys/titan-start/main/titan-install-v0.13.sh && chmod +x titan-install-v0.13.sh && sudo ./titan-install-v0.13.sh --type=1 --storage=2 --code=你的身份码  
+  wget https://raw.githubusercontent.com/qingjiuzys/titan-start/main/titan-install-v0.13.sh && chmod +x titan-install-v0.13.sh && sudo ./titan-install-v0.13.sh --type=1 --storage=2 --code=你的身份码
 ```
+
 #### 同地区加机器无限制跑
 ```
    rm -rf ~/*.sh && wget https://raw.githubusercontent.com/qingjiuzys/titan-start/main/titan-install-v0.13.sh && chmod +x titan-install-v0.13.sh && sudo ./titan-install-v0.13.sh --type=1 --storage=2 --code=你的身份码  
@@ -57,14 +61,17 @@
 <img width="1706" alt="image" src="https://github.com/qingjiuzys/titan-start/assets/142193034/bf9c60eb-1827-42e0-8d7c-23b9d58cba71">
 
 
-#### 已测试系统:
+#### titan已测试系统:
 
 - Ubuntu 18.04
 - Debian
 - OpenCloudOS 8
 
-#### 不支持的系统：
 
+#### meson已测试系统:
+- Ubuntu 18.04
+
+#### 不支持的系统：
 - CentOS
 
 
