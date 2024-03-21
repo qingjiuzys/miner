@@ -2,7 +2,7 @@
 
 ## 便宜服务器
 
-##  [腾讯云10台280一个月 (点击注册)](https://dashboard.gaganode.com/register?referral_code=qpkofealpfaomjb)
+##  [腾讯云10台280一个月 (点击注册)](https://curl.qcloud.com/BFVZJJLZ)
 ##  [阿里云99一年服 (点击注册)](https://www.aliyun.com/daily-act/ecs/activity_selection?userCode=dulqpq5t)
 
 # 注册链接
