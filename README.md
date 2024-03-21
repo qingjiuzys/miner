@@ -2,6 +2,8 @@
 
 ##  [Titan特别邀请链接(点击注册)](https://test1.titannet.io/intiveRegister?code=wLFnFN)
 
+<br><br>
+
 ##  [meson特别邀请链接(点击注册)](https://dashboard.gaganode.com/register?referral_code=qpkofealpfaomjb)
 
 ### 特性
@@ -78,6 +80,13 @@
 #### 不支持的系统：
 - CentOS
 
+## 便宜服务器
+
+#  [腾讯云10台280一个月 (点击注册)](https://dashboard.gaganode.com/register?referral_code=qpkofealpfaomjb)
+<br>
+<br>
+
+#  [阿里云 (点击注册)](https://www.aliyun.com/daily-act/ecs/activity_selection?userCode=dulqpq5t)
 
 ## 请喝咖啡～
 <img width="400" alt="image" src="https://github.com/qingjiuzys/titan-start/assets/142193034/6f167d6a-a510-449b-99c6-0a36b08b828e">
