@@ -195,6 +195,7 @@ generate_random_string() {
 # 创建存储目录
 create_storage_directories() {
     echo "******************Docker存储目录创建中******************"
+     mkdir -p "${folder}/data"
     for i in $(seq 1 $containers)
     do
         mkdir -p "${folder}/storage-${i}"
@@ -207,7 +208,7 @@ run_containers() {
     echo "******************正在启动docker实例******************"
     for i in $(seq 1 $containers)
     do
-        docker run --name titan-edge0$i -d -v "${folder}/storage-$i:/root/.titanedge" nezha123/titan-edge:1.0
+        docker run --name titan-edge0$i -d -v "${folder}/storage-$i:/root/.titanedge"  -v "${folder}/data:/root/.titanedge/storage/assets"  nezha123/titan-edge:1.0
     done
     echo "******************所有Docker实例启动完成******************"
 }
@@ -422,7 +423,6 @@ check_meson_gaga_install(){
     fi
 
 }
-
 #检查安装meson_cdn
 check_meson_cdn_install(){
     if [ -n "$meson_cdn_code" ]; then
@@ -447,4 +447,4 @@ echo "******************所有安装任务完成********************"
 
 echo "******************检查安装meson->cdn中******************"
 check_meson_cdn_install
-echo "******************所有安装任务完成**********************"
+echo "******************所有安装任务完成********************"
