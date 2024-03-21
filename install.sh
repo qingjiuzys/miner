@@ -408,20 +408,21 @@ check_meson_gaga_install(){
     if [ -n "$meson_gaga_code" ]; then
         echo "******************正在安装meson->gaga******************"
         curl -o apphub-linux-amd64.tar.gz $MESON_GAGA_BIN_URL && tar -zxf apphub-linux-amd64.tar.gz && rm -f apphub-linux-amd64.tar.gz
-        sudo ./apphub-linux-amd64/apphub service remove && sudo ./apphub service install
+        sudo ./apphub-linux-amd64/apphub service remove && sudo ./apphub-linux-amd64/apphub service install
         sleep 20
         sudo ./apphub-linux-amd64/apphub service start
         sleep 30 
-        ./apphub status
+        ./apphub-linux-amd64/apphub status
         sleep 20
         sudo ./apphub-linux-amd64/apps/gaganode/gaganode config set --token=$meson_gaga_code
-        ./apphub restart
+        ./apphub-linux-amd64/apphub restart
         echo "******************meson->gaga安装结束******************"
        else
         echo "******************未选择安装meson_gaga_code******************"
     fi
 
 }
+
 #检查安装meson_cdn
 check_meson_cdn_install(){
     if [ -n "$meson_cdn_code" ]; then
