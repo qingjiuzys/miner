@@ -50,6 +50,10 @@
   wget https://raw.githubusercontent.com/qingjiuzys/titan-start/main/install.sh && chmod +x install.sh && sudo ./install.sh --type=1 --storage=8 --code=你的titan身份码 --meson_gaga_code=你的mesonGaga码
 ```
 
+#### 批量单独安装meson
+```
+  wget https://raw.githubusercontent.com/qingjiuzys/titan-start/main/meson-install-v0.01.sh && chmod +x meson-install-v0.01.sh && sudo ./meson-install-v0.01.sh --meson_gaga_code=你的mesonGaga码
+```
 
 #### 配置5个容器
 ```
