@@ -208,7 +208,8 @@ run_containers() {
     echo "******************正在启动docker实例******************"
     for i in $(seq 1 $containers)
     do
-        docker run --name titan-edge0$i -d -v "${folder}/storage-$i:/root/.titanedge"  -v "${folder}/data:/root/.titanedge/storage/assets"  nezha123/titan-edge:1.0
+    #-v "${folder}/data:/root/.titanedge/storage/assets"
+        docker run --name titan-edge0$i -d -v "${folder}/storage-$i:/root/.titanedge" nezha123/titan-edge:1.0
     done
     echo "******************所有Docker实例启动完成******************"
 }
