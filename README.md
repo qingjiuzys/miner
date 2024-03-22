@@ -45,6 +45,11 @@
 
 
 ### 示例命令
+#### 更新版本
+```
+  wget https://raw.githubusercontent.com/qingjiuzys/titan-start/main/titan-update-v0.13.sh && chmod +x titan-update-v0.13.sh && sudo ./titan-update-v0.13.sh --storage=填写你的硬盘-10G最后除以5
+```
+
 #### 配置titan 5个容器 + meson
 ```
   wget https://raw.githubusercontent.com/qingjiuzys/titan-start/main/install.sh && chmod +x install.sh && sudo ./install.sh --type=1 --storage=8 --code=你的titan身份码 --meson_gaga_code=你的mesonGaga码
