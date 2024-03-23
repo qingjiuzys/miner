@@ -52,28 +52,19 @@
 
 #### 配置titan 5个容器 + meson
 ```
-  wget https://raw.githubusercontent.com/qingjiuzys/titan-start/main/install.sh && chmod +x install.sh && sudo ./install.sh --type=1 --storage=8 --code=你的titan身份码 --meson_gaga_code=你的mesonGaga码
+  rm -rf ~/install.sh && wget https://raw.githubusercontent.com/qingjiuzys/titan-start/main/install.sh && chmod +x install.sh && sudo ./install.sh --type=1 --storage=8 --code=你的titan身份码 --meson_gaga_code=你的mesonGaga码
 ```
 
 #### 批量单独安装meson
 ```
-  wget https://raw.githubusercontent.com/qingjiuzys/titan-start/main/meson-install-v0.01.sh && chmod +x meson-install-v0.01.sh && sudo ./meson-install-v0.01.sh --meson_gaga_code=你的mesonGaga码
+ rm -rf ~/meson-install-v0.01.sh && wget https://raw.githubusercontent.com/qingjiuzys/titan-start/main/meson-install-v0.01.sh && chmod +x meson-install-v0.01.sh && sudo ./meson-install-v0.01.sh --meson_gaga_code=你的mesonGaga码
 ```
 
-#### 配置5个容器
-```
-  wget https://raw.githubusercontent.com/qingjiuzys/titan-start/main/titan-install-v0.13.sh && chmod +x titan-install-v0.13.sh && sudo ./titan-install-v0.13.sh --type=1 --storage=2 --code=你的身份码
-```
 
-#### 同地区加机器无限制跑
+#### 配置titan主机 + 4个容器 + meson
 ```
-   rm -rf ~/*.sh && wget https://raw.githubusercontent.com/qingjiuzys/titan-start/main/titan-install-v0.13.sh && chmod +x titan-install-v0.13.sh && sudo ./titan-install-v0.13.sh --type=1 --storage=2 --code=你的身份码  
-``` 
-
-#### 主机 + 4个容器
-``` 
- wget https://raw.githubusercontent.com/qingjiuzys/titan-start/main/titan-install-v0.13.sh && chmod +x titan-install-v0.13.sh && sudo ./titan-install-v0.13.sh --type=2 --storage=2  --code=你的身份码 
-``` 
+  rm -rf ~/install.sh && wget https://raw.githubusercontent.com/qingjiuzys/titan-start/main/install.sh && chmod +x install.sh && sudo ./install.sh --type=2 --storage=8 --code=你的titan身份码 --meson_gaga_code=你的mesonGaga码
+```
 
 #### 测试明细 
 
