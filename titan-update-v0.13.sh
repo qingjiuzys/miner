@@ -44,7 +44,7 @@ storage_dirs_prefix="/mnt/storage-" # 存储目录前缀
 target_data_dir="/mnt/data" # 目标数据目录
 containers=5 # 容器数量
 image_name="nezha123/titan-edge:1.0" # Docker镜像名称
-new_image_name="nezha123/titan-edge:1.2" # Docker镜像名称
+new_image_name="nezha123/titan-edge" # Docker镜像名称
 
 
 # 移动storage目录下的assets文件，并修改config.toml配置
