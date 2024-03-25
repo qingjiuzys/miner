@@ -209,7 +209,7 @@ run_containers() {
     for i in $(seq 1 $containers)
     do
     #-v "${folder}/data:/root/.titanedge/storage/assets"
-        docker run --name titan-edge0$i -d -v "${folder}/storage-$i:/root/.titanedge" nezha123/titan-edge:1.2
+        docker run --name titan-edge0$i -d -v "${folder}/storage-$i:/root/.titanedge" nezha123/titan-edge
     done
     echo "******************所有Docker实例启动完成******************"
 }
@@ -352,7 +352,7 @@ init_docker(){
     systemctl start docker
     systemctl enable docker
     # 拉取指定的Docker镜像
-    docker pull docker.io/nezha123/titan-edge:1.2
+    docker pull docker.io/nezha123/titan-edge
     echo "******************Docker安装脚本执行完毕******************"
 }
 
