@@ -47,7 +47,7 @@
 ### 示例命令
 #### 更新版本
 ```
-  wget https://raw.githubusercontent.com/qingjiuzys/titan-start/main/titan-update-v0.13.sh && chmod +x titan-update-v0.13.sh && sudo ./titan-update-v0.13.sh --storage=填写你的硬盘-10G最后除以5
+  wget https://raw.githubusercontent.com/qingjiuzys/titan-start/main/update.sh && chmod +x update.sh && sudo ./update.sh --storage=填写你的硬盘-10G最后除以5
 ```
 
 #### 配置titan 5个容器 + meson
@@ -74,9 +74,8 @@
 #### titan已测试系统:
 
 - Ubuntu 18.04
-- Debian
-- OpenCloudOS 8
-
+- Debian （不推荐）
+- OpenCloudOS 8 （不推荐）
 
 #### meson已测试系统:
 - Ubuntu 18.04
