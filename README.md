@@ -83,9 +83,10 @@
 #### 不支持的系统：
 - CentOS
 
+## 鸣谢（以下排名不分先后）
+
+- qx****77  20元
+- Di****xx  10元
 
 ## 请喝咖啡～
 <img width="400" alt="image" src="https://github.com/qingjiuzys/titan-start/assets/142193034/6f167d6a-a510-449b-99c6-0a36b08b828e">
-
-## 邀请注册加V进群
-<img width="400" alt="image" src="https://github.com/qingjiuzys/titan-start/assets/142193034/80729a2b-deaa-48a4-9ef7-e330a6616bf2">
