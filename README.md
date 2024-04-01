@@ -4,6 +4,13 @@
 
 ##  [腾讯云10台280一个月 (点击注册)](https://curl.qcloud.com/IfHGBzdw)
 
+## 购买位置
+<img width="400" alt="image" src="https://github.com/qingjiuzys/titan-start/assets/142193034/bfc2a7aa-5630-483e-9611-bfe4785aa674">
+
+## 选择系统 
+<img width="400" alt="image" src="https://github.com/qingjiuzys/titan-start/assets/142193034/06da8dd5-184e-41a2-bc1c-ce969dd7fd58">
+
+
 # 注册链接
 
 ##  [Titan特别邀请链接(点击注册)](https://test1.titannet.io/intiveRegister?code=wLFnFN)
