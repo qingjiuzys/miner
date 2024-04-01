@@ -2,8 +2,7 @@
 
 ## 便宜服务器
 
-##  [腾讯云10台280一个月 (点击注册)](https://curl.qcloud.com/BFVZJJLZ)
-##  [阿里云99一年服 (点击注册)](https://www.aliyun.com/daily-act/ecs/activity_selection?userCode=dulqpq5t)
+##  [腾讯云10台280一个月 (点击注册)](https://curl.qcloud.com/IfHGBzdw)
 
 # 注册链接
 
@@ -33,10 +32,12 @@
 - `--already_install_NFS`：是否已经安装NFS，1 表示是，2 表示否。
 - `--containers CONTAINERS`：需要管理的容器数量，默认为 4。
 - `--storage STORAGE`：容器需要管理的存储空间大小。
+- `--meson_gaga_code`：需要安装的mesonGagaCode(不填写不安装)       
+- `--meson_cdn_code`：需要安装的weasonCdnCode(不填写不安装)      
 
 ### 注意事项
 
-- 如果使用容器服务，请确保正确配置`storage`设置。
+- 如果使用容器服务，请确保正确配置`storage`设置,否则会导致磁盘塞满，无法执行定时任务守护进程。
 
 ### 帮助命令
 
@@ -45,14 +46,20 @@
 
 
 ### 示例命令
+
 #### 更新版本
 ```
-  wget https://raw.githubusercontent.com/qingjiuzys/titan-start/main/update.sh && chmod +x update.sh && sudo ./update.sh --storage=填写你的硬盘-10G最后除以5
+  rm -rf ~/update.sh && wget https://raw.githubusercontent.com/qingjiuzys/titan-start/main/update.sh && chmod +x update.sh && sudo ./update.sh --storage=填写你的硬盘-10G最后除以5
 ```
 
-#### 配置titan 5个容器 + meson
+#### 安装titan 5个容器 + meson
 ```
   rm -rf ~/install.sh && wget https://raw.githubusercontent.com/qingjiuzys/titan-start/main/install.sh && chmod +x install.sh && sudo ./install.sh --type=1 --storage=8 --code=你的titan身份码 --meson_gaga_code=你的mesonGaga码
+```
+
+#### 安装titan 5个容器
+```
+  rm -rf ~/install.sh && wget https://raw.githubusercontent.com/qingjiuzys/titan-start/main/install.sh && chmod +x install.sh && sudo ./install.sh --type=1 --storage=8 --code=你的titan身份码
 ```
 
 #### 批量单独安装meson
@@ -60,10 +67,9 @@
  rm -rf ~/meson-install-v0.01.sh && wget https://raw.githubusercontent.com/qingjiuzys/titan-start/main/meson-install-v0.01.sh && chmod +x meson-install-v0.01.sh && sudo ./meson-install-v0.01.sh --meson_gaga_code=你的mesonGaga码
 ```
 
-
-#### 配置titan主机 + 4个容器 + meson
+#### NFS使用说明 
 ```
-  rm -rf ~/install.sh && wget https://raw.githubusercontent.com/qingjiuzys/titan-start/main/install.sh && chmod +x install.sh && sudo ./install.sh --type=2 --storage=8 --code=你的titan身份码 --meson_gaga_code=你的mesonGaga码
+  NFS使用时，会自动将目录挂载 /mnt/titan/+12位随机字符串的目录里，对于不同主机并未做规定。
 ```
 
 #### 测试明细 
@@ -87,6 +93,3 @@
 
 - qx****77  20元
 - Di****xx  10元
-
-## 请喝咖啡～
-<img width="400" alt="image" src="https://github.com/qingjiuzys/titan-start/assets/142193034/6f167d6a-a510-449b-99c6-0a36b08b828e">
