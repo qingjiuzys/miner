@@ -179,8 +179,8 @@ set_storage(){
     for i in $(seq 1 $containers)
     do
         echo "******************正在修改容器$titan-edge0$i的存储配置******************"
-        sed -i "s/#StorageGB = [0-9]*/StorageGB = $storage/" "$config_file"
-        sed -i "s/StorageGB = [0-9]*/StorageGB = $storage/" "$config_file"
+        sed -i "s/#StorageGB = [0-9]*/StorageGB = $storage/" "/mnt/storage-$i"
+        sed -i "s/StorageGB = [0-9]*/StorageGB = $storage/" "/mnt/storage-$i"
         echo "******************重启容器$titan-edge0$i以应用新的存储配置******************"
         docker restart titan-edge0$i
     done
