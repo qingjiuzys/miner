@@ -97,7 +97,8 @@
 - CentOS
 
 ## 创作不易请作者喝茶
-![image](https://github.com/qingjiuzys/miner/assets/142193034/05ebaaf3-fa68-4133-b22a-7029cd1cc881)
+<img width="200" alt="image" src="https://github.com/qingjiuzys/miner/assets/142193034/05ebaaf3-fa68-4133-b22a-7029cd1cc881">
+
 
 
 ## 鸣谢（以下排名不分先后）
