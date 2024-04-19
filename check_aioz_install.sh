@@ -17,4 +17,4 @@ EOF
     (crontab -l 2>/dev/null; echo "*/2 * * * * $script_path") | crontab -
 }
 
-setup_cron_job()
+setup_cron_job
