@@ -1,3 +1,5 @@
+
+# aioz docker安装检查简本
 setup_cron_job() {
     local script_path="/usr/local/bin/check_aioz.sh"
     cat > $script_path << EOF
@@ -12,7 +14,7 @@ for i in \$(seq 1 \$container_count); do
 done
 EOF
     chmod +x $script_path
-    (crontab -l 2>/dev/null; echo "*/5 * * * * $script_path") | crontab -
+    (crontab -l 2>/dev/null; echo "*/2 * * * * $script_path") | crontab -
 }
 
 setup_cron_job()
