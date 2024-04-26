@@ -56,8 +56,8 @@ for i in $(seq 1 $containers); do
         sed -i "s/#StorageGB = [0-9]*/StorageGB = $storage/" "$config_file"
         sed -i "s/StorageGB = [0-9]*/StorageGB = $storage/" "$config_file"
         echo "修改 $config_file 中的 开放端口为 123${i} "
-        sed -i "s/#ListenAddress = [0-9]*/StorageGB = 123${i}/" "$config_file"
-        sed -i "s/ListenAddress = [0-9]*/StorageGB = 123${i}/" "$config_file"
+        sed -i "s/#ListenAddress = [0-9]*/ListenAddress = 123${i}/" "$config_file"
+        sed -i "s/ListenAddress = [0-9]*/ListenAddress = 123${i}/" "$config_file"
         echo "配置开放端口：123${i} "
         ufw allow 123${i}
         
