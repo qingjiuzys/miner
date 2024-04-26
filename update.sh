@@ -55,7 +55,7 @@ for i in $(seq 1 $containers); do
         echo "修改 $config_file 中的存储大小为 $new_storage_size GB"
         sed -i "s/#StorageGB = [0-9]*/StorageGB = $storage/" "$config_file"
         sed -i "s/StorageGB = [0-9]*/StorageGB = $storage/" "$config_file"
-        echo "修改 $config_file 中的 开放端口为 $12341 "
+        echo "修改 $config_file 中的 开放端口为 1234${i} "
         sed -i "s/#ListenAddress = [0-9]*/StorageGB = 123${i}/" "$config_file"
         sed -i "s/ListenAddress = [0-9]*/StorageGB = 123${i}/" "$config_file"
         echo "配置开放端口：123${i} "
