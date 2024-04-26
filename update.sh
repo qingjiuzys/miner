@@ -55,6 +55,12 @@ for i in $(seq 1 $containers); do
         echo "修改 $config_file 中的存储大小为 $new_storage_size GB"
         sed -i "s/#StorageGB = [0-9]*/StorageGB = $storage/" "$config_file"
         sed -i "s/StorageGB = [0-9]*/StorageGB = $storage/" "$config_file"
+        echo "修改 $config_file 中的 开放端口为 $12341 "
+        sed -i "s/#ListenAddress = [0-9]*/StorageGB = 123${i}/" "$config_file"
+        sed -i "s/ListenAddress = [0-9]*/StorageGB = 123${i}/" "$config_file"
+        echo "配置开放端口：123${i} "
+        ufw allow 123${i}
+        
     else
         echo "配置文件 $config_file 不存在，跳过"
     fi
@@ -78,7 +84,7 @@ docker pull "$new_image_name"
 for i in $(seq 1 $containers); do
     container_name="titan-edge0$i"
     echo "重新启动容器：$new_image_name"
-    docker run --name "$container_name" -d -v "${storage_dirs_prefix}${i}:/root/.titanedge"  "$new_image_name"
+    docker run --name "$container_name" -p 123${i}:123${i} -d -v "${storage_dirs_prefix}${i}:/root/.titanedge"  "$new_image_name"
 done
 
-echo "迁移和容器重启完成。"
+echo "更新容器完成，若在云厂商等环境，请检查安全组开放端口 1231,1232，1233,1234,1235"
