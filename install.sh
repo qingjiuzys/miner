@@ -364,7 +364,6 @@ main_install(){
     case $type in
         1)
             echo "******************您选择了容器安装模式***********************"
-            containers = $containers
             sleep 2
             ;;
        2)
