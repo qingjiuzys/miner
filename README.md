@@ -59,7 +59,7 @@
   rm -rf ~/update.sh && wget https://raw.githubusercontent.com/qingjiuzys/titan-start/main/update.sh && chmod +x update.sh && sudo ./update.sh --storage=填写你的硬盘-10G最后除以5
 ```
 
-#### 安装titan 5个容器 + meson
+#### 安装titan自定义实例数量
 ```
 rm -rf ~/install.sh && wget https://raw.githubusercontent.com/qingjiuzys/titan-start/main/install.sh && chmod +x install.sh && sudo ./install.sh --type=1 --storage=需要开放的容量 --code=你的身份码  --containers=容器数量填1-5
 ```
