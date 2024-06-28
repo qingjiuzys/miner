@@ -66,7 +66,7 @@ rm -rf ~/install.sh && wget https://raw.githubusercontent.com/qingjiuzys/titan-s
 
 #### 老版本更新（不重装系统）
 ```
-rm -rf ~/titan_v2_to_v3.sh && wget https://raw.githubusercontent.com/qingjiuzys/miner/master/titan_v2_to_v3.sh && chmod +x titan_v2_to_v3.sh && sudo ./titan_v2_to_v3.sh --storage=需要开放的容量 --token=你的身份码  --containers=容器数量填1-5
+rm -rf /mnt/storage-* && rm -rf ~/titan_v2_to_v3.sh && wget https://raw.githubusercontent.com/qingjiuzys/miner/master/titan_v2_to_v3.sh && chmod +x titan_v2_to_v3.sh && sudo ./titan_v2_to_v3.sh --storage=需要开放的容量 --token=你的身份码  --containers=容器数量填1-5
 ```
 
 #### NFS使用说明 
