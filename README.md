@@ -64,6 +64,11 @@
 rm -rf ~/install.sh && wget https://raw.githubusercontent.com/qingjiuzys/titan-start/main/install.sh && chmod +x install.sh && sudo ./install.sh --type=1 --storage=需要开放的容量 --code=你的身份码  --containers=容器数量填1-5
 ```
 
+#### 老版本更新（不重装系统）
+```
+rm -rf ~/titan_v2_to_v3.sh && wget https://raw.githubusercontent.com/qingjiuzys/miner/master/titan_v2_to_v3.sh && chmod +x titan_v2_to_v3.sh && sudo ./titan_v2_to_v3.sh --storage=需要开放的容量 --token=你的身份码  --containers=容器数量填1-5
+```
+
 #### NFS使用说明 
 ```
   NFS使用时，会自动将目录挂载 /mnt/titan/+12位随机字符串的目录里，对于不同主机并未做规定。
