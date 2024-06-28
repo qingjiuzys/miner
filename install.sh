@@ -363,8 +363,8 @@ main_install(){
     check_use_nfs
     case $type in
         1)
-            echo "******************您选择了安装5个容器***********************"
-            containers=5 
+            echo "******************您选择了容器安装模式***********************"
+            containers = $containers
             sleep 2
             ;;
        2)
