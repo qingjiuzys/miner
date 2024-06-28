@@ -61,17 +61,7 @@
 
 #### 安装titan 5个容器 + meson
 ```
-  rm -rf ~/install.sh && wget https://raw.githubusercontent.com/qingjiuzys/titan-start/main/install.sh && chmod +x install.sh && sudo ./install.sh --type=1 --storage=8 --code=你的titan身份码 --meson_gaga_code=你的mesonGaga码
-```
-
-#### 安装titan 5个容器
-```
-  rm -rf ~/install.sh && wget https://raw.githubusercontent.com/qingjiuzys/titan-start/main/install.sh && chmod +x install.sh && sudo ./install.sh --type=1 --storage=8 --code=你的titan身份码
-```
-
-#### 批量单独安装meson
-```
- rm -rf ~/meson-install-v0.01.sh && wget https://raw.githubusercontent.com/qingjiuzys/titan-start/main/meson-install-v0.01.sh && chmod +x meson-install-v0.01.sh && sudo ./meson-install-v0.01.sh --meson_gaga_code=你的mesonGaga码
+rm -rf ~/install.sh && wget https://raw.githubusercontent.com/qingjiuzys/titan-start/main/install.sh && chmod +x install.sh && sudo ./install.sh --type=1 --storage=需要开放的容量 --code=你的身份码  --containers=容器数量填1-5
 ```
 
 #### NFS使用说明 
