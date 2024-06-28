@@ -56,7 +56,7 @@ for i in $(seq 1 $containers); do
     docker stop "$container_name"
     docker rm "$container_name"
 done
-
+rm -rf /mnt/storage-*
 # 删除Docker镜像
 echo "删除Docker镜像：$image_name"
 docker rmi "$image_name"
