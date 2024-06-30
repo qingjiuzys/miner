@@ -340,15 +340,15 @@ init_docker(){
             echo "*****************不一定支持但在强制安装Docker*****************" 
         fi
         # 安装Docker
-        # echo "******************正在安装Docker...******************"
-        # curl -fsSL https://get.docker.com -o get-docker.sh
-        # sh get-docker.sh
-        # if [ $? -eq 0 ]; then
-        #     echo "******************Docker安装成功******************"
-        # else
-        #     echo "******************Docker安装失败（尝试其他方式安装docker）******************" 1>&2
+         echo "******************正在安装Docker...******************"
+         curl -fsSL https://get.docker.com -o get-docker.sh
+         sh get-docker.sh
+         if [ $? -eq 0 ]; then
+             echo "******************Docker安装成功******************"
+         else
+             echo "******************Docker安装失败（尝试其他方式安装docker）******************" 1>&2
             install_docker
-        # fi
+         fi
     # 启动并使Docker开机自启
     systemctl start docker
     systemctl enable docker
