@@ -61,6 +61,8 @@ rm -rf /mnt/storage-*
 echo "删除Docker镜像：$image_name"
 docker rmi "$image_name"
 docker pull "$new_image_name"
+echo "清理未使用的 Docker 资源..."
+docker system prune -f
 
 for i in $(seq 1 $containers); do
     container_name="titan-edge0$i"
