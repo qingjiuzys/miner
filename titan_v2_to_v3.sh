@@ -53,16 +53,34 @@ done
 for i in $(seq 1 $containers); do
     container_name="titan-edge0$i"
     echo "停止并删除容器：$container_name"
-    docker stop "$container_name"
-    docker rm "$container_name"
+    # 检查容器是否存在
+    if [ "$(docker ps -a -q -f name=$container_name)" ]; then
+        # 停止容器
+        docker stop "$container_name"
+        # 确保容器已停止
+        while [ "$(docker ps -q -f name=$container_name)" ]; do
+            echo "等待容器停止：$container_name"
+            sleep 5
+        done
+        docker rm "$container_name"
+        while [ "$(docker ps -a -q -f name=$container_name)" ]; do
+            echo "等待容器删除：$container_name"
+            sleep 1
+        done
+    else
+        echo "容器不存在：$container_name"
+    fi
 done
-rm -rf /mnt/storage-*
+
+# 清理未使用的 Docker 资源
+echo "清理未使用的 Docker 资源..."
+docker system prune -f
 # 删除Docker镜像
 echo "删除Docker镜像：$image_name"
 docker rmi "$image_name"
 docker pull "$new_image_name"
-echo "清理未使用的 Docker 资源..."
-docker system prune -f
+echo "清理完成。"
+rm -rf /mnt/storage-*
 
 for i in $(seq 1 $containers); do
     container_name="titan-edge0$i"
